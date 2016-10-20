@@ -5,10 +5,6 @@ Open source MDX project - meet Lily.
 ## Contents
 
 - [Installation](#installation)
-..- [Node](#node)
-..- [Dependencies](#dependencies)
-..- [Environment](#environment)
-..- [Up and running](#up-and-running)
 - [Features](#features)
 - [Contribution](#contribution)
 
@@ -16,19 +12,19 @@ Open source MDX project - meet Lily.
 
 Feel free to clone the repository anywhere on your computer.
 
-### Node
+__Node__
 
 First you need to get [Node.js](https://nodejs.org/en/) onto your machine. You can use a simple `sudo apt-get install npm` if you are a Linux user.
 
-### Dependencies
+__Dependencies__
 
-Run you console and `cd` in the repository directory. Run `npm install` and wait for the dependencies to be installed.
+Open up your console and `cd` in the repository directory. Run `npm install` and wait for the dependencies to be installed. Then run the `gulp` command so all the source files can compile.
 
-### Environment
+__Environment__
 
 Perform a simple `cp .env.example .env` and rewrite the `SLACK_API_TOKEN` variable with your own bot token.
 
-### Up and running
+__Up__ and running
 
 All that is left to do now is to run a single `node .` command and you are good to go.
 
