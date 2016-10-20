@@ -2,6 +2,8 @@
 
 Open source MDX project - meet Lily.
 
+[![Build Status](https://travis-ci.org/MDX-CS/lily.svg?branch=master)](https://github.com/MDX-CS/lily)
+
 ## Contents
 
 - [Installation](#installation)
