@@ -1,6 +1,6 @@
 import ModuleProvider from '../ModuleProvider';
 
-export default class HelloModuleProvider extends ModuleProvider{
+export default class HelloModuleProvider extends ModuleProvider {
   /**
    * Assing the command keyword
    *

@@ -1,6 +1,4 @@
 import { expect } from 'chai';
-require('dotenv').config();
-
 import CommandParser from '../src/Parser/CommandParser';
 
 describe('When parsing a message it', () => {
