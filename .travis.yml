@@ -1,0 +1,17 @@
+language: javascript
+
+sudo: false
+
+cache:
+    directories:
+        - node_modules
+
+before_script:
+  - cp .env.example .env
+
+install:
+  - travis_retry npm install
+
+script:
+  - gulp
+  - npm run test
