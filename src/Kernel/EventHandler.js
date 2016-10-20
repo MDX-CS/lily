@@ -12,10 +12,8 @@ export default class EventHandler {
     this.Events = Events;
     this.modules = new Array();
 
-    // We register all our modules
     this.registerModules();
 
-    // Start up the real time messaging channel
     this.RTM.start();
   }
 
@@ -26,7 +24,8 @@ export default class EventHandler {
    */
   registerModules() {
 
-    this.assign(this.Events.MESSAGE, new HelloModuleProvider(this.RTM));
+    this
+      .assign(this.Events.MESSAGE, new HelloModuleProvider(this.RTM));
 
   }
 
@@ -43,7 +42,7 @@ export default class EventHandler {
         }
 
         this.modules[event].forEach((module) => {
-          this.resolveModule(module, CommandParser.getArgs(message.text))}
+          this.resolveModule(module, CommandParser.getArgs(message.text), message)}
         );
       });
     }
@@ -69,15 +68,15 @@ export default class EventHandler {
    * Assign a module to given event
    *
    */
-  resolveModule(module, args) {
-    if (module.command() !== args[0]) {
+  resolveModule(module, args, message) {
+    if (module.commands().indexOf(args[0]) === -1) {
       return;
     }
 
     if (! module instanceof ModuleProvider) {
-      throw new TypeError('Module must be a child of the ModuleProvider class');
+      throw new TypeError('Module provider must be a child of the ModuleProvider class');
     }
 
-    module.register(args.slice(1));
+    module.register(args.slice(1), message);
   }
 }

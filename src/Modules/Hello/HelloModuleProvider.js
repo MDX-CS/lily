@@ -5,15 +5,15 @@ export default class HelloModuleProvider extends ModuleProvider{
    * Assing the command keyword
    *
    */
-  command() {
-    return 'greet';
+  commands() {
+    return ['greet'];
   }
 
   /**
    * Register the module provider
    *
    */
-  register(args) {
-    console.log('Hey');
+  register(args, message) {
+    this.RTM.sendMessage(`Why hello there, <@${message.user}>!`, message.channel);
   }
 }

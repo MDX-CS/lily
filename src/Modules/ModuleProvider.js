@@ -9,7 +9,7 @@ export default class ModuleProvider extends AbstractClass {
     super();
 
     this.require('register')
-      .require('command')
+      .require('commands')
       .check();
 
     this.RTM = RTM;
