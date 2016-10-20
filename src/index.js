@@ -26,7 +26,7 @@ DotEnv.config();
  |
  */
 
-import EventHandler from './Events/EventHandler';
+import EventHandler from './Kernel/EventHandler';
 import SlackClient from '@slack/client';
 
 const Handler = new EventHandler(
