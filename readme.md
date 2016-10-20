@@ -1,6 +1,35 @@
 # Lily - the ultimate Slack bot
 
-## Ideas
+Open source MDX project - meet Lily.
 
-- Split commands into modules and use a service provider for each module
-- Provide string pattern (keyword) for each command in the command class itself
+## Contents
+
+- [Installation](#installation)
+- [Features](#features)
+- [Contribution](#contribution)
+
+## Installation
+
+__Node__
+
+First you need to get [Node.js](https://nodejs.org/en/) onto your machine. You can use a simple `sudo apt-get install npm` if you are a Linux user.
+
+__Dependencies__
+
+Feel free to clone the repository anywhere on your computer. Open up your console and `cd` in the repo directory. Run `npm install` and wait for the dependencies to be installed. Then run the `gulp` command so all the source files can compile.
+
+__Environment__
+
+Perform a simple `cp .env.example .env` and rewrite the `SLACK_API_TOKEN` variable with your own bot token.
+
+__Up and running__
+
+All that is left to do now is to run a single `node .` command and you are good to go. Log in to your slack team, invite `@lily` to your channel and type `@lily greet`!
+
+## Features
+
+None noteworthy, for now.
+
+## Contribution
+
+Feel free to fork this repository and contribute via PRs. I will update the contribution guide ASAP.
