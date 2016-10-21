@@ -1,6 +1,6 @@
 {
   "name": "lily",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Lily - the amazing Slack bot",
   "main": "dist/index.js",
   "scripts": {

@@ -10,6 +10,7 @@ export default class ModuleProvider extends AbstractClass {
 
     this.require('register')
       .require('commands')
+      .shouldNotBeInstantiated('ModuleProvider')
       .check();
 
     this.RTM = RTM;
