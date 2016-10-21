@@ -9,6 +9,12 @@ describe('When parsing a message it', () => {
     expect(CommandParser.isMentioned(id, message)).to.be.true;
   });
 
+  it('handles empty message', () => {
+    let id = 'lily';
+
+    expect(CommandParser.isMentioned(id, undefined)).to.be.false;
+  });
+
   it('determines the command args', () => {
     let message = 'Some text <@lily> some more args';
 

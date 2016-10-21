@@ -4,6 +4,10 @@ export default class CommandParser {
    *
    */
   static isMentioned(id, message) {
+    if (message === undefined) {
+      return false;
+    }
+
     return message.includes(`<@${id}>`);
   }
 
