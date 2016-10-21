@@ -1,4 +1,5 @@
 import HelloModuleProvider from '../Modules/Hello/HelloModuleProvider';
+import MessageBuilder from '../Messaging/MessageBuilder';
 import ModuleProvider from '../Modules/ModuleProvider';
 import MessageBox from '../Messaging/MessageBox';
 
@@ -7,11 +8,11 @@ export default class EventHandler {
    * We boot up the service
    *
    */
-  constructor(builder, events) {
+  constructor(rtm, slack, events) {
     this.events = events;
-    this.builder = builder;
-    this.rtm = builder.getRtm();
-    this.modules = new Array();
+    this.rtm = rtm;
+    this.slack = slack;
+    this.modules = [];
 
     this.registerModules();
 
@@ -26,7 +27,7 @@ export default class EventHandler {
   registerModules() {
 
     this
-      .assign(this.events.MESSAGE, new HelloModuleProvider(this.builder));
+      .assign(this.events.MESSAGE, new HelloModuleProvider());
 
   }
 
@@ -38,13 +39,9 @@ export default class EventHandler {
   listen() {
     for (let event in this.modules) {
       this.rtm.on(event, (message) => {
-        let box = new MessageBox(message);
-
-        if (! box.isMentioned(this.rtm.activeUserId)) {
-          return;
-        }
-
-        this.modules[event].forEach((module) => this.resolveModule(module, box));
+        this.modules[event].forEach((module) => {
+          return this.resolveModule(module, new MessageBox(message));
+        });
       });
     }
   }
@@ -56,7 +53,7 @@ export default class EventHandler {
    */
   assign(event, module) {
     if (this.modules[event] === undefined) {
-      this.modules[event] = new Array;
+      this.modules[event] = [];
     }
 
     this.modules[event].push(module);
@@ -70,6 +67,10 @@ export default class EventHandler {
    *
    */
   resolveModule(module, box) {
+    if (! box.isMentioned(this.rtm.activeUserId)) {
+      return;
+    }
+
     if (module.commands().indexOf(box.args(0)) === -1) {
       return;
     }
@@ -78,6 +79,6 @@ export default class EventHandler {
       throw new TypeError('Module provider must be a child of the ModuleProvider class');
     }
 
-    module.register(box);
+    module.register(box, new MessageBuilder(this.rtm, this.slack, box));
   }
 }
