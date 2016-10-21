@@ -147,6 +147,13 @@ describe('Attachment builder', () => {
     expect(attachment.structure.color).to.equal('someColor');
   });
 
+  it('has preset colors', () => {
+    let attachment = new AttachmentBuilder;
+    attachment.danger();
+
+    expect(attachment.structure.color).to.equal('#ff3860');
+  });
+
   it('adds footer to the attachment', () => {
     let attachment = new AttachmentBuilder;
     attachment.footer('someAttachmentFooter');

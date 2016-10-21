@@ -55,6 +55,50 @@ export default class AttachmentBuilder {
 
 
   /**
+   * Changes color of the attachment
+   *
+   */
+  danger() {
+    this.color('#ff3860');
+
+    return this;
+  }
+
+
+  /**
+   * Changes color of the attachment
+   *
+   */
+  info() {
+    this.color('#3273dc');
+
+    return this;
+  }
+
+
+  /**
+   * Changes color of the attachment
+   *
+   */
+  success() {
+    this.color('#23d160');
+
+    return this;
+  }
+
+
+  /**
+   * Changes color of the attachment
+   *
+   */
+  warning() {
+    this.color('#ffdd57');
+
+    return this;
+  }
+
+
+  /**
    * Adds footer to the attachment
    *
    */

@@ -12,7 +12,7 @@ describe('An absctact class', () => {
     expect(new ValidChild).to.be.ok;
   });
 
-  it('cannot not be instantiated directly', () => {
+  it('cannot be instantiated directly', () => {
     assert.throws(() => {
       new Parent;
     }, TypeError, 'This class is abstract and should not ne instantiated directly');
