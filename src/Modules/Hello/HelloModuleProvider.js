@@ -13,11 +13,23 @@ export default class HelloModuleProvider extends ModuleProvider {
    * Register the module provider
    *
    */
-  register(box) {
-    this.builder
-      .channel(box.channel())
+  register(box, builder) {
+    builder
+      .respond()
       .text('Hello, <@1>')
       .mention(box.user())
+      .attach((attachment) => {
+        return attachment
+          .info()
+          .text('How is it going?')
+          .fields({
+            Hello: 'World',
+            AlsoHello: 'Universe'
+          })
+          .title('Greeting')
+          .footer('By kouks')
+          .timestamp();
+      })
       .send();
   }
 }

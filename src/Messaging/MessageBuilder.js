@@ -1,11 +1,14 @@
+import AttachmentBuilder from './AttachmentBuilder';
+
 export default class MessageBuilder {
   /**
    * Class constructor
    *
    */
-  constructor(rtm, slack) {
+  constructor(rtm, slack, box) {
     this.slack = slack;
     this.rtm = rtm;
+    this.box = box;
   }
 
 
@@ -15,6 +18,17 @@ export default class MessageBuilder {
    */
   channel(channel) {
     this.channel = channel;
+
+    return this;
+  }
+
+
+  /**
+   * Set channel
+   *
+   */
+  respond() {
+    this.channel(this.box.channel());
 
     return this;
   }
@@ -47,10 +61,42 @@ export default class MessageBuilder {
 
 
   /**
+   * Adds attachment to the message
+   *
+   */
+  attach(callback) {
+    if (this.attachments === undefined) {
+      this.attachments = [];
+    }
+
+    this.attachments.push(callback(new AttachmentBuilder).build());
+
+    return this;
+  }
+
+
+  /**
+   * Sends the message through rtm
+   *
+   */
+  send() {
+    if (this.attachments === undefined) {
+      return this.rtm.sendMessage(this.buildSimpleMessage(), this.channel);
+    }
+
+    return this.slack.api('chat.postMessage', this.buildMessageWithAttachments());
+  }
+
+
+  /**
    * Render the text
    *
    */
-  render(id) {
+  buildSimpleMessage() {
+    if (this.mentions === undefined) {
+      return this.text;
+    }
+
     let rendered = '';
 
     this.mentions.forEach((mention, index) => {
@@ -62,16 +108,21 @@ export default class MessageBuilder {
 
 
   /**
-   * Sends the message through rtm
+   * Get the rtm variable
    *
    */
-  send() {
-    return this.rtm.sendMessage(this.render(), this.channel);
+  buildMessageWithAttachments() {
+    return {
+      as_user: true,
+      channel: this.channel,
+      text: this.buildSimpleMessage(),
+      attachments: JSON.stringify(this.attachments)
+    };
   }
 
 
   /**
-   * Get the rtm variable
+   * It builds up messages
    *
    */
   getRtm() {
