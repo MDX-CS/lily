@@ -30,18 +30,6 @@ export default class HelloModuleProvider extends ModuleProvider {
           .footer('By kouks')
           .timestamp();
       })
-      .attach((attachment) => {
-        return attachment
-          .text('How is it going?')
-          .fields({
-            Hello: 'World',
-            AlsoHello: 'Universe'
-          })
-          .color('#b23432')
-          .title('Greeting')
-          .footer('By kouks')
-          .timestamp();
-      })
       .send();
   }
 }
