@@ -15,11 +15,20 @@ export default class HelloModuleProvider extends ModuleProvider {
    */
   register(box, builder) {
     builder
-      .channel(box.channel())
+      .respond()
       .text('Hello, <@1>')
       .mention(box.user())
       .attach((attachment) => {
-        return attachment.text('How is it going?');
+        return attachment
+          .text('How is it going?')
+          .fields({
+            Hello: 'World',
+            AlsoHello: 'Universe'
+          })
+          .color('#b23432')
+          .title('Greeting')
+          .footer('By kouks')
+          .timestamp();
       })
       .send();
   }

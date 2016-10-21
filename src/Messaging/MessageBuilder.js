@@ -5,9 +5,10 @@ export default class MessageBuilder {
    * Class constructor
    *
    */
-  constructor(rtm, slack) {
+  constructor(rtm, slack, box) {
     this.slack = slack;
     this.rtm = rtm;
+    this.box = box;
   }
 
 
@@ -17,6 +18,17 @@ export default class MessageBuilder {
    */
   channel(channel) {
     this.channel = channel;
+
+    return this;
+  }
+
+
+  /**
+   * Set channel
+   *
+   */
+  respond() {
+    this.channel(this.box.channel());
 
     return this;
   }

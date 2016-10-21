@@ -68,6 +68,14 @@ describe('Message builder', () => {
     expect(data).to.have.property('text', 'Hello, <@user>');
     expect(data).to.have.property('attachments', '[{"text":"How is it going?"}]');
   });
+
+  it('responds to a channel', () => {
+    let box = new MessageBox({ channel: 'some-channel'} );
+    let builder = new MessageBuilder(false, false, box);
+    builder.respond()
+
+    expect(builder.channel).to.be.equal('some-channel');
+  });
 });
 
 describe('Message box', () => {
@@ -165,6 +173,19 @@ describe('Attachment builder', () => {
     attachment.text('someAttachmentText');
 
     expect(attachment.build()).to.have.property('text', 'someAttachmentText');
+  });
+
+  it('builds fields', () => {
+    let attachment = new AttachmentBuilder;
+    attachment.fields({
+      someTitle: 'someValue',
+      someOtherTitle: 'someOtherValue',
+    });
+
+    expect(attachment.build()).to.have.deep.property('fields.[0].title', 'someTitle');
+    expect(attachment.build()).to.have.deep.property('fields.[0].value', 'someValue');
+    expect(attachment.build()).to.have.deep.property('fields.[1].title', 'someOtherTitle');
+    expect(attachment.build()).to.have.deep.property('fields.[1].value', 'someOtherValue');
   });
 });
 

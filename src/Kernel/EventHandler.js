@@ -79,6 +79,6 @@ export default class EventHandler {
       throw new TypeError('Module provider must be a child of the ModuleProvider class');
     }
 
-    module.register(box, new MessageBuilder(this.rtm, this.slack));
+    module.register(box, new MessageBuilder(this.rtm, this.slack, box));
   }
 }
