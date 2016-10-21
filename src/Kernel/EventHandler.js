@@ -39,13 +39,9 @@ export default class EventHandler {
   listen() {
     for (let event in this.modules) {
       this.rtm.on(event, (message) => {
-        let box = new MessageBox(message);
-
-        if (! box.isMentioned(this.rtm.activeUserId)) {
-          return;
-        }
-
-        this.modules[event].forEach((module) => this.resolveModule(module, box));
+        this.modules[event].forEach((module) => {
+          return this.resolveModule(module, new MessageBox(message));
+        });
       });
     }
   }
@@ -71,6 +67,10 @@ export default class EventHandler {
    *
    */
   resolveModule(module, box) {
+    if (! box.isMentioned(this.rtm.activeUserId)) {
+      return;
+    }
+
     if (module.commands().indexOf(box.args(0)) === -1) {
       return;
     }
