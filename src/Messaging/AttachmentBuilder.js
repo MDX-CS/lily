@@ -83,6 +83,27 @@ export default class AttachmentBuilder {
 
 
   /**
+   * Adds fields to the attachment
+   *
+   */
+  fields(structure) {
+    if (this.structure.fields === undefined) {
+      this.structure.fields = [];
+    }
+
+    for (let title in structure) {
+      this.structure.fields.push({
+        title: title,
+        value: structure[title],
+        short: true
+      });
+    }
+
+    return this;
+  }
+
+
+  /**
    * Builds the attachment object
    *
    */
