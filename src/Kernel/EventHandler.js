@@ -1,4 +1,5 @@
 import HelloModuleProvider from '../Modules/Hello/HelloModuleProvider';
+import MessageBuilder from '../Messaging/MessageBuilder';
 import ModuleProvider from '../Modules/ModuleProvider';
 import MessageBox from '../Messaging/MessageBox';
 
@@ -7,11 +8,11 @@ export default class EventHandler {
    * We boot up the service
    *
    */
-  constructor(builder, events) {
+  constructor(rtm, slack, events) {
     this.events = events;
-    this.builder = builder;
-    this.rtm = builder.getRtm();
-    this.modules = new Array();
+    this.rtm = rtm;
+    this.slack = slack;
+    this.modules = [];
 
     this.registerModules();
 
@@ -26,7 +27,7 @@ export default class EventHandler {
   registerModules() {
 
     this
-      .assign(this.events.MESSAGE, new HelloModuleProvider(this.builder));
+      .assign(this.events.MESSAGE, new HelloModuleProvider());
 
   }
 
@@ -56,7 +57,7 @@ export default class EventHandler {
    */
   assign(event, module) {
     if (this.modules[event] === undefined) {
-      this.modules[event] = new Array;
+      this.modules[event] = [];
     }
 
     this.modules[event].push(module);
@@ -78,6 +79,6 @@ export default class EventHandler {
       throw new TypeError('Module provider must be a child of the ModuleProvider class');
     }
 
-    module.register(box);
+    module.register(box, new MessageBuilder(this.rtm, this.slack));
   }
 }
