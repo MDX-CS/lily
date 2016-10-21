@@ -1,20 +1,21 @@
-import ModuleProvider from '../Modules/ModuleProvider';
 import HelloModuleProvider from '../Modules/Hello/HelloModuleProvider';
-import CommandParser from '../Parser/CommandParser';
+import ModuleProvider from '../Modules/ModuleProvider';
+import MessageBox from '../Messaging/MessageBox';
 
 export default class EventHandler {
   /**
    * We boot up the service
    *
    */
-  constructor(RTM, Events) {
-    this.RTM = RTM;
-    this.Events = Events;
+  constructor(builder, events) {
+    this.events = events;
+    this.builder = builder;
+    this.rtm = builder.getRtm();
     this.modules = new Array();
 
     this.registerModules();
 
-    this.RTM.start();
+    this.rtm.start();
   }
 
 
@@ -25,7 +26,7 @@ export default class EventHandler {
   registerModules() {
 
     this
-      .assign(this.Events.MESSAGE, new HelloModuleProvider(this.RTM));
+      .assign(this.events.MESSAGE, new HelloModuleProvider(this.builder));
 
   }
 
@@ -36,14 +37,14 @@ export default class EventHandler {
    */
   listen() {
     for (let event in this.modules) {
-      this.RTM.on(event, (message) => {
-        if (! CommandParser.isMentioned(this.RTM.activeUserId, message.text)) {
+      this.rtm.on(event, (message) => {
+        let box = new MessageBox(message);
+
+        if (! box.isMentioned(this.rtm.activeUserId)) {
           return;
         }
 
-        this.modules[event].forEach((module) => {
-          this.resolveModule(module, CommandParser.getArgs(message.text), message)}
-        );
+        this.modules[event].forEach((module) => this.resolveModule(module, box));
       });
     }
   }
@@ -68,8 +69,8 @@ export default class EventHandler {
    * Assign a module to given event
    *
    */
-  resolveModule(module, args, message) {
-    if (module.commands().indexOf(args[0]) === -1) {
+  resolveModule(module, box) {
+    if (module.commands().indexOf(box.args(0)) === -1) {
       return;
     }
 
@@ -77,6 +78,6 @@ export default class EventHandler {
       throw new TypeError('Module provider must be a child of the ModuleProvider class');
     }
 
-    module.register(args.slice(1), message);
+    module.register(box);
   }
 }

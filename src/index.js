@@ -26,12 +26,17 @@ DotEnv.config();
  |
  */
 
+import MessageBuilder from './Messaging/MessageBuilder';
 import EventHandler from './Kernel/EventHandler';
 import SlackClient from '@slack/client';
+import Slack from 'slack-node';
 
 const Handler = new EventHandler(
-  new SlackClient.RtmClient(process.env.SLACK_API_TOKEN),
-  SlackClient.RTM_EVENTS
+  new MessageBuilder(
+    new SlackClient.RtmClient(process.env.SLACK_API_TOKEN),
+    new Slack(process.env.SLACK_API_TOKEN)
+  ),
+  SlackClient.RTM_EVENTS,
 );
 
 Handler.listen();
