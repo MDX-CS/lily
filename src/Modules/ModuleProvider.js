@@ -5,13 +5,14 @@ export default class ModuleProvider extends AbstractClass {
    * Class constructor
    *
    */
-  constructor(RTM) {
+  constructor(builder) {
     super();
 
     this.require('register')
       .require('commands')
+      .shouldNotBeInstantiated('ModuleProvider')
       .check();
 
-    this.RTM = RTM;
+    this.builder = builder;
   }
 }

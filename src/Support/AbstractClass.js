@@ -24,4 +24,17 @@ export default class AbstractClass {
 
     return this;
   }
+
+
+  /**
+   * Abstract class should not be instantiated directly
+   *
+   */
+  shouldNotBeInstantiated(name) {
+    if (this.constructor === AbstractClass || this.constructor.name == name) {
+      throw new TypeError('This class is abstract and should not ne instantiated directly');
+    }
+
+    return this;
+  }
 }
