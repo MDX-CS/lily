@@ -14,7 +14,10 @@ export default class HelloModuleProvider extends ModuleProvider {
    *
    */
   register(args, message) {
-    // this.builder.channel(message.channel)
-    //   .send();
+    this.builder
+      .channel(message.channel)
+      .text('Hello, <@1>')
+      .mention(message.user)
+      .send();
   }
 }

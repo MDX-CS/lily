@@ -10,7 +10,7 @@ export default class EventHandler {
   constructor(builder, events) {
     this.events = events;
     this.builder = builder;
-    this.rtm = builder.rtm();
+    this.rtm = builder.getRtm();
     this.modules = new Array();
 
     this.registerModules();
