@@ -13,11 +13,11 @@ export default class HelloModuleProvider extends ModuleProvider {
    * Register the module provider
    *
    */
-  register(args, message) {
+  register(box) {
     this.builder
-      .channel(message.channel)
+      .channel(box.channel())
       .text('Hello, <@1>')
-      .mention(message.user)
+      .mention(box.user())
       .send();
   }
 }

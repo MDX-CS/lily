@@ -3,7 +3,8 @@ export default class MessageBuilder {
    * Class constructor
    *
    */
-  constructor(rtm) {
+  constructor(rtm, slack) {
+    this.slack = slack;
     this.rtm = rtm;
   }
 
