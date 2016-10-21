@@ -9,6 +9,7 @@ export default class HelloModuleProvider extends ModuleProvider {
     return ['greet'];
   }
 
+
   /**
    * Register the module provider
    *

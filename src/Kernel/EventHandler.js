@@ -1,4 +1,6 @@
 import HelloModuleProvider from '../Modules/Hello/HelloModuleProvider';
+import PunsModuleProvider from '../Modules/Puns/PunsModuleProvider';
+
 import MessageBuilder from '../Messaging/MessageBuilder';
 import ModuleProvider from '../Modules/ModuleProvider';
 import MessageBox from '../Messaging/MessageBox';
@@ -27,7 +29,8 @@ export default class EventHandler {
   registerModules() {
 
     this
-      .assign(this.events.MESSAGE, new HelloModuleProvider());
+      .assign(this.events.MESSAGE, new HelloModuleProvider())
+      .assign(this.events.MESSAGE, new PunsModuleProvider());
 
   }
 
