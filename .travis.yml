@@ -8,8 +8,11 @@ node_js:
 before_script:
   - cp .env.example .env
 
+before_install:
+  - npm install -g yarn
+
 install:
-  - travis_retry npm install
+  - yarn
 
 script:
   - gulp

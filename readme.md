@@ -2,7 +2,7 @@
 
 Open source MDX project - meet Lily.
 
-[![Build Status](https://travis-ci.org/MDX-CS/lily.svg?branch=master)](https://github.com/MDX-CS/lily)
+[![Build Status](https://travis-ci.org/MDX-CS/lily.svg?branch=master)](https://travis-ci.org/MDX-CS/lily)
 
 ## Contents
 
@@ -19,6 +19,8 @@ First you need to get [Node.js](https://nodejs.org/en/) onto your machine. You c
 __Dependencies__
 
 Feel free to clone the repository anywhere on your computer. Open up your console and `cd` in the repo directory. Run `npm install` and wait for the dependencies to be installed. Then run the `gulp` command so all the source files can compile.
+
+Not that if you have yarn installed, our package uses this technology, so you can choose to run `yarn` instead of `npm install`. This approach is usually much faster.
 
 __Environment__
 
