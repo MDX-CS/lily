@@ -14,6 +14,7 @@ export default class HelloModuleProvider extends ModuleProvider {
    *
    */
   register(args, message) {
-    this.RTM.sendMessage(`Hello there, <@${message.user}>!`, message.channel);
+    // this.builder.channel(message.channel)
+    //   .send();
   }
 }

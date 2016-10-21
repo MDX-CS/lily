@@ -1,5 +1,5 @@
-import ModuleProvider from '../Modules/ModuleProvider';
 import HelloModuleProvider from '../Modules/Hello/HelloModuleProvider';
+import ModuleProvider from '../Modules/ModuleProvider';
 import CommandParser from '../Parser/CommandParser';
 
 export default class EventHandler {
@@ -7,14 +7,15 @@ export default class EventHandler {
    * We boot up the service
    *
    */
-  constructor(RTM, Events) {
-    this.RTM = RTM;
-    this.Events = Events;
+  constructor(builder, events) {
+    this.events = events;
+    this.builder = builder;
+    this.rtm = builder.rtm();
     this.modules = new Array();
 
     this.registerModules();
 
-    this.RTM.start();
+    this.rtm.start();
   }
 
 
@@ -25,7 +26,7 @@ export default class EventHandler {
   registerModules() {
 
     this
-      .assign(this.Events.MESSAGE, new HelloModuleProvider(this.RTM));
+      .assign(this.events.MESSAGE, new HelloModuleProvider(this.builder));
 
   }
 
@@ -36,8 +37,8 @@ export default class EventHandler {
    */
   listen() {
     for (let event in this.modules) {
-      this.RTM.on(event, (message) => {
-        if (! CommandParser.isMentioned(this.RTM.activeUserId, message.text)) {
+      this.rtm.on(event, (message) => {
+        if (! CommandParser.isMentioned(this.rtm.activeUserId, message.text)) {
           return;
         }
 
