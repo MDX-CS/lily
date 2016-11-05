@@ -43,6 +43,15 @@ export default class MessageBox {
 
 
   /**
+   * Provides the message body
+   *
+   */
+  message() {
+    return this.message.text;
+  }
+
+
+  /**
    * Decides whether the user with given id was mentioned
    *
    */

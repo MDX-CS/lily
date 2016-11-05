@@ -1,5 +1,6 @@
 import HelloModuleProvider from '../Modules/Hello/HelloModuleProvider';
 import PunsModuleProvider from '../Modules/Puns/PunsModuleProvider';
+import RegexModuleProvider from '../Modules/Regex/RegexModuleProvider';
 
 import MessageBuilder from '../Messaging/MessageBuilder';
 import ModuleProvider from '../Modules/ModuleProvider';
@@ -30,7 +31,8 @@ export default class EventHandler {
 
     this
       .assign(this.events.MESSAGE, new HelloModuleProvider())
-      .assign(this.events.MESSAGE, new PunsModuleProvider());
+      .assign(this.events.MESSAGE, new PunsModuleProvider())
+      .assign(this.events.MESSAGE, new RegexModuleProvider());
 
   }
 
@@ -74,7 +76,7 @@ export default class EventHandler {
       return;
     }
 
-    if (module.commands().indexOf(box.args(0)) === -1) {
+    if (! module.suitable(box)) {
       return;
     }
 

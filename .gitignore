@@ -2,3 +2,4 @@ node_modules/
 .editorconfig
 dist/
 .env
+dropbox.js

@@ -17,7 +17,13 @@ export default class PunsModuleProvider extends ModuleProvider {
   register(box, builder) {
     builder
       .respond()
-      .text(this.pun())
+      .text('There you go, <@1>')
+      .mention(box.user())
+      .attach((attachment) => {
+        return attachment
+          .danger()
+          .text(this.pun())
+      }.bind(this))
       .send();
   }
 
