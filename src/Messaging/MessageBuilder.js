@@ -51,7 +51,7 @@ export default class MessageBuilder {
    */
   mention(id) {
     if (this.mentions === undefined) {
-      this.mentions = new Array;
+      this.mentions = [];
     }
 
     this.mentions.push(id);
@@ -69,7 +69,7 @@ export default class MessageBuilder {
       this.attachments = [];
     }
 
-    this.attachments.push(callback(new AttachmentBuilder).build());
+    this.attachments.push(callback(new AttachmentBuilder()).build());
 
     return this;
   }
@@ -116,7 +116,7 @@ export default class MessageBuilder {
       as_user: true,
       channel: this.channel,
       text: this.buildSimpleMessage(),
-      attachments: JSON.stringify(this.attachments)
+      attachments: JSON.stringify(this.attachments),
     };
   }
 

@@ -134,14 +134,13 @@ export default class AttachmentBuilder {
     if (this.structure.fields === undefined) {
       this.structure.fields = [];
     }
-
-    for (let title in structure) {
+    Object.keys(structure).forEach(title =>
       this.structure.fields.push({
-        title: title,
+        title,
         value: structure[title],
-        short: true
-      });
-    }
+        short: true,
+      })
+    );
 
     return this;
   }

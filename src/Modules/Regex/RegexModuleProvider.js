@@ -7,7 +7,7 @@ export default class RegexModuleProvider extends ModuleProvider {
    */
   commands() {
     return {
-      pattern: /.+ regex .+/
+      pattern: /.+ regex .+/,
     };
   }
 

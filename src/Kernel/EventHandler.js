@@ -28,12 +28,10 @@ export default class EventHandler {
    *
    */
   registerModules() {
-
     this
       .assign(this.events.MESSAGE, new HelloModuleProvider())
       .assign(this.events.MESSAGE, new PunsModuleProvider())
       .assign(this.events.MESSAGE, new RegexModuleProvider());
-
   }
 
 
@@ -42,13 +40,13 @@ export default class EventHandler {
    *
    */
   listen() {
-    for (let event in this.modules) {
+    Object.keys(this.modules).forEach(event =>
       this.rtm.on(event, (message) => {
-        this.modules[event].forEach((module) => {
-          return this.resolveModule(module, new MessageBox(message));
-        });
-      });
-    }
+        this.modules[event].forEach(module =>
+          this.resolveModule(module, new MessageBox(message))
+        );
+      })
+    );
   }
 
 
@@ -72,18 +70,18 @@ export default class EventHandler {
    *
    */
   resolveModule(module, box) {
-    if (! box.isMentioned(this.rtm.activeUserId)) {
-      return;
+    if (!box.isMentioned(this.rtm.activeUserId)) {
+      return null;
     }
 
-    if (! module.suitable(box)) {
-      return;
+    if (!module.suitable(box)) {
+      return null;
     }
 
-    if (! module instanceof ModuleProvider) {
+    if (!(module instanceof ModuleProvider)) {
       throw new TypeError('Module provider must be a child of the ModuleProvider class');
     }
 
-    module.register(box, new MessageBuilder(this.rtm, this.slack, box));
+    return module.register(box, new MessageBuilder(this.rtm, this.slack, box));
   }
 }

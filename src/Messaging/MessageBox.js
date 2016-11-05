@@ -14,7 +14,7 @@ export default class MessageBox {
    *
    */
   args(id) {
-    let args = CommandParser.getArgs(this.message.text);
+    const args = CommandParser.getArgs(this.message.text);
 
     if (id === undefined) {
       return args;

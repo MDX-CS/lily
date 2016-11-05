@@ -24,8 +24,6 @@ export default class ModuleProvider extends AbstractClass {
       return this.commands().indexOf(box.args(0)) !== -1;
     }
 
-    let partial = box.args().join(' ');
-
-    return partial.match(this.commands().pattern);
+    return box.args().join(' ').match(this.commands().pattern);
   }
 }

@@ -19,18 +19,18 @@ export default class HelloModuleProvider extends ModuleProvider {
       .respond()
       .text('Hello, <@1>')
       .mention(box.user())
-      .attach((attachment) => {
-        return attachment
+      .attach(attachment =>
+        attachment
           .info()
           .text('How is it going?')
           .fields({
             Hello: 'World',
-            AlsoHello: 'Universe'
+            AlsoHello: 'Universe',
           })
           .title('Greeting')
           .footer('By kouks')
-          .timestamp();
-      })
+          .timestamp()
+      )
       .send();
   }
 }

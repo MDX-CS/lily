@@ -20,7 +20,7 @@ __Dependencies__
 
 Feel free to clone the repository anywhere on your computer. Open up your console and `cd` in the repo directory. Run `npm install` and wait for the dependencies to be installed. Then run the `gulp` command so all the source files can compile.
 
-Not that if you have yarn installed, our package uses this technology, so you can choose to run `yarn` instead of `npm install`. This approach is usually much faster.
+Note that if you have yarn installed, our package uses this technology, so you can choose to run `yarn` instead of `npm install`. This approach is usually much faster.
 
 __Environment__
 

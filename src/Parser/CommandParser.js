@@ -18,17 +18,17 @@ export default class CommandParser {
    */
   static getArgs(message) {
     let record = false;
-    let args = [];
+    const args = [];
 
     message.split(' ').forEach((fraction) => {
       if (record) {
         args.push(fraction);
       }
 
-      if (fraction.match(/\<@.+\>/)) {
+      if (fraction.match(/<@.+>/)) {
         record = true;
       }
-    })
+    });
 
     return args;
   }
