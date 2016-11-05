@@ -8,7 +8,7 @@
 import DotEnv from 'dotenv';
 import Slack from 'slack-node';
 import SlackClient from '@slack/client';
-import EventHandler from './Kernel/EventHandler';
+import Handler from './Events/Handler';
 
 /*
  |-----------------------------------------------------------------------
@@ -30,11 +30,10 @@ DotEnv.config();
  |
  */
 
-
-const Handler = new EventHandler(
+const App = new Handler(
   new SlackClient.RtmClient(process.env.SLACK_API_TOKEN),
   new Slack(process.env.SLACK_API_TOKEN),
   SlackClient.RTM_EVENTS,
 );
 
-Handler.listen();
+App.listen();
