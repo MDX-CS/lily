@@ -1,30 +1,37 @@
 import { expect } from 'chai';
 import MessageBox from '../src/Messaging/MessageBox';
 import ModuleProvider from '../src/Modules/ModuleProvider';
+import MessageEventResolver from '../src/Events/Resolvers/MessageEventResolver';
 
 describe('When providing a module it', () => {
   it('ignores non-relevant messages', () => {
     let message = { text: 'Test <@lily> unrelated test message' }
     let box = new MessageBox(message);
     let module = new BasicModuleProvider(box, null);
+    let resolver = new MessageEventResolver(null);
+    resolver.rtm = { activeUserId: 'lily' };
 
-    expect(module.suitable(box)).to.be.false;
+    expect(resolver.suitable(module, box)).to.be.false;
   });
 
   it('determines suitable messages by literal strings', () => {
     let message = { text: 'Test <@lily> some test message' }
     let box = new MessageBox(message);
     let module = new BasicModuleProvider(box, null);
+    let resolver = new MessageEventResolver(null);
+    resolver.rtm = { activeUserId: 'lily' };
 
-    expect(module.suitable(box)).to.be.true;
+    expect(resolver.suitable(module, box)).to.be.true;
   });
 
   it('determines suitable messages by a regular expression', () => {
     let message = { text: 'Test <@lily> I want my timetable' }
     let box = new MessageBox(message);
     let module = new RegexModuleProvider(box, null);
+    let resolver = new MessageEventResolver(null);
+    resolver.rtm = { activeUserId: 'lily' };
 
-    expect(module.suitable(box)).to.be.ok;
+    expect(resolver.suitable(module, box)).to.be.ok;
   });
 });
 
