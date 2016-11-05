@@ -7,3 +7,5 @@ plugins:
 
 rules:
   class-methods-use-this: off
+  require-jsdoc: error
+  valid-jsdoc: error

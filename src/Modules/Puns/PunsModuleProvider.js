@@ -2,8 +2,9 @@ import ModuleProvider from '../ModuleProvider';
 
 export default class PunsModuleProvider extends ModuleProvider {
   /**
-   * Assing the command keyword
+   * Assing the command keywords.
    *
+   * @returns {Array|Object}  Keywords
    */
   commands() {
     return ['pun'];
@@ -11,8 +12,11 @@ export default class PunsModuleProvider extends ModuleProvider {
 
 
   /**
-   * Register the module provider
+   * Register the module provider.
    *
+   * @param   {MessageBox} box  The message box instance
+   * @param   {MessageBuilder} builder  The message builder instance
+   * @returns {mixed}  Response
    */
   register(box, builder) {
     builder
@@ -29,8 +33,9 @@ export default class PunsModuleProvider extends ModuleProvider {
 
 
   /**
-   * Return a random pun
+   * Return a random pun.
    *
+   * @returns {string}  The pun
    */
   pun() {
     const puns = [

@@ -2,8 +2,9 @@ import AbstractClass from '../Support/AbstractClass';
 
 export default class ModuleProvider extends AbstractClass {
   /**
-   * Class constructor
+   * Class constructor.
    *
+   * @returns {void}
    */
   constructor() {
     super();
@@ -16,8 +17,10 @@ export default class ModuleProvider extends AbstractClass {
 
 
   /**
-   * Determines whether the module is suitable for the given message
+   * Determines whether the module is suitable for the given message.
    *
+   * @param   {MessageBox} box  The message box isntance
+   * @returns {bool}  Whether the module is suitable
    */
   suitable(box) {
     if (Array.isArray(this.commands())) {

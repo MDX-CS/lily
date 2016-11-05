@@ -2,8 +2,9 @@ import ModuleProvider from '../ModuleProvider';
 
 export default class RegexModuleProvider extends ModuleProvider {
   /**
-   * Assing the command keyword
+   * Assing the command keywords.
    *
+   * @returns {Array|Object}  Keywords
    */
   commands() {
     return {
@@ -13,8 +14,11 @@ export default class RegexModuleProvider extends ModuleProvider {
 
 
   /**
-   * Register the module provider
+   * Register the module provider.
    *
+   * @param   {MessageBox} box  The message box instance
+   * @param   {MessageBuilder} builder  The message builder instance
+   * @returns {mixed}  Response
    */
   register(box, builder) {
     builder

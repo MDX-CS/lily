@@ -2,8 +2,12 @@ import AttachmentBuilder from './AttachmentBuilder';
 
 export default class MessageBuilder {
   /**
-   * Class constructor
+   * Class constructor.
    *
+   * @param   {RtmClient} rtm  The real time messaging client
+   * @param   {Slack} slack  The Slack client class
+   * @param   {MessageBox} box  The Message box instance
+   * @returns {void}
    */
   constructor(rtm, slack, box) {
     this.slack = slack;
@@ -13,8 +17,10 @@ export default class MessageBuilder {
 
 
   /**
-   * Set channel
+   * Sets channel.
    *
+   * @param   {string} channel  The name of the channel
+   * @returns {this}  Instance of this class
    */
   channel(channel) {
     this.channel = channel;
@@ -24,8 +30,9 @@ export default class MessageBuilder {
 
 
   /**
-   * Set channel
+   * Sets previous channel.
    *
+   * @returns {this}  Instance of this class
    */
   respond() {
     this.channel(this.box.channel());
@@ -35,8 +42,10 @@ export default class MessageBuilder {
 
 
   /**
-   * Set text
+   * Sets text.
    *
+   * @param   {string} text  The message body
+   * @returns {this}  Instance of this class
    */
   text(text) {
     this.text = text;
@@ -46,8 +55,10 @@ export default class MessageBuilder {
 
 
   /**
-   * Add mention clause
+   * Add mention clause.
    *
+   * @param   {int} id  The mentioned user id
+   * @returns {this}  Instance of this class
    */
   mention(id) {
     if (this.mentions === undefined) {
@@ -61,8 +72,10 @@ export default class MessageBuilder {
 
 
   /**
-   * Adds attachment to the message
+   * Adds attachment to the message.
    *
+   * @param   {callable} callback  The attachment builder function
+   * @returns {this}  Instance of this class
    */
   attach(callback) {
     if (this.attachments === undefined) {
@@ -76,8 +89,9 @@ export default class MessageBuilder {
 
 
   /**
-   * Sends the message through rtm
+   * Sends the message through rtm or webapi.
    *
+   * @returns {bool}  Whether the message has been sent
    */
   send() {
     if (this.attachments === undefined) {
@@ -89,8 +103,9 @@ export default class MessageBuilder {
 
 
   /**
-   * Render the text
+   * Render the text.
    *
+   * @returns {string}  The rendered message
    */
   buildSimpleMessage() {
     if (this.mentions === undefined) {
@@ -108,8 +123,9 @@ export default class MessageBuilder {
 
 
   /**
-   * Get the rtm variable
+   * Builds message with attachments.
    *
+   * @returns {Object}  The rendered message with attachments
    */
   buildMessageWithAttachments() {
     return {
@@ -122,8 +138,9 @@ export default class MessageBuilder {
 
 
   /**
-   * It builds up messages
+   * Returns the RTM instance.
    *
+   * @returns {RtmClient}  The rtm client
    */
   getRtm() {
     return this.rtm;
