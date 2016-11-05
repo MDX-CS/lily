@@ -14,7 +14,7 @@ export default class MessageBox {
    *
    */
   args(id) {
-    let args = CommandParser.getArgs(this.message.text);
+    const args = CommandParser.getArgs(this.message.text);
 
     if (id === undefined) {
       return args;
@@ -39,6 +39,15 @@ export default class MessageBox {
    */
   user() {
     return this.message.user;
+  }
+
+
+  /**
+   * Provides the message body
+   *
+   */
+  message() {
+    return this.message.text;
   }
 
 

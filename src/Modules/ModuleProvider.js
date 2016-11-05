@@ -13,4 +13,17 @@ export default class ModuleProvider extends AbstractClass {
       .shouldNotBeInstantiated('ModuleProvider')
       .check();
   }
+
+
+  /**
+   * Determines whether the module is suitable for the given message
+   *
+   */
+  suitable(box) {
+    if (Array.isArray(this.commands())) {
+      return this.commands().indexOf(box.args(0)) !== -1;
+    }
+
+    return box.args().join(' ').match(this.commands().pattern);
+  }
 }

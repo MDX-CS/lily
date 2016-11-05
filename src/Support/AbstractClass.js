@@ -17,7 +17,7 @@ export default class AbstractClass {
    */
   require(method) {
     if (this.required === undefined) {
-      this.required = new Array;
+      this.required = [];
     }
 
     this.required.push(method);
@@ -31,7 +31,7 @@ export default class AbstractClass {
    *
    */
   shouldNotBeInstantiated(name) {
-    if (this.constructor === AbstractClass || this.constructor.name == name) {
+    if (this.constructor === AbstractClass || this.constructor.name === name) {
       throw new TypeError('This class is abstract and should not ne instantiated directly');
     }
 

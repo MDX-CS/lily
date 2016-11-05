@@ -4,6 +4,10 @@ export default class CommandParser {
    *
    */
   static isMentioned(id, message) {
+    if (message === undefined) {
+      return false;
+    }
+
     return message.includes(`<@${id}>`);
   }
 
@@ -14,17 +18,17 @@ export default class CommandParser {
    */
   static getArgs(message) {
     let record = false;
-    let args = [];
+    const args = [];
 
     message.split(' ').forEach((fraction) => {
       if (record) {
         args.push(fraction);
       }
 
-      if (fraction.match(/\<@.+\>/)) {
+      if (fraction.match(/<@.+>/)) {
         record = true;
       }
-    })
+    });
 
     return args;
   }
