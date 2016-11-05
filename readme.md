@@ -49,7 +49,7 @@ When adding new functionality via _Modules_, create a new folder in the `src/Mod
 ```javascript
 /** This module will react to messages in format "@lily some ..." or "@lily strings ..." */
 commands() {
-  return ['some', 'strings']
+  return ['some', 'strings'];
 }
 ```
 
@@ -58,7 +58,7 @@ commands() {
 commands() {
   return {
     pattern: /.* regex.*/,
-  }
+  };
 }
 ```
 
