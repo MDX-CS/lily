@@ -8,8 +8,12 @@ import MessageBox from '../Messaging/MessageBox';
 
 export default class EventHandler {
   /**
-   * We boot up the service
+   * We boot up the service.
    *
+   * @param   {RtmClient} rtm  The real time messaging client
+   * @param   {Slack} slack  The Slack client class
+   * @param   {Array} events  The array of events
+   * @returns {void}
    */
   constructor(rtm, slack, events) {
     this.events = events;
@@ -24,8 +28,9 @@ export default class EventHandler {
 
 
   /**
-   * Register all event modules
+   * Register all event modules.
    *
+   * @returns {void}
    */
   registerModules() {
     this
@@ -36,8 +41,9 @@ export default class EventHandler {
 
 
   /**
-   * Listen to various events
+   * Listen to various events.
    *
+   * @returns {void}
    */
   listen() {
     Object.keys(this.modules).forEach(event =>
@@ -51,8 +57,11 @@ export default class EventHandler {
 
 
   /**
-   * Assign a module to given event
+   * Assign a module to given event.
    *
+   * @param   {string} event  The event to be assigned to
+   * @param   {ModuleProvider} module  The module to be assigned
+   * @returns {this}  Instance of this class
    */
   assign(event, module) {
     if (this.modules[event] === undefined) {
@@ -66,8 +75,11 @@ export default class EventHandler {
 
 
   /**
-   * Assign a module to given event
+   * Assign a module to given event.
    *
+   * @param   {ModuleProvider} module  The module to be assigned
+   * @param   {MessageBox} box  Message box instance
+   * @returns {mixed}  Module response
    */
   resolveModule(module, box) {
     if (!box.isMentioned(this.rtm.activeUserId)) {

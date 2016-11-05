@@ -2,16 +2,20 @@ import CommandParser from '../Parser/CommandParser';
 
 export default class MessageBox {
   /**
-   * Class constructor
+   * Class constructor.
    *
+   * @param   {Object} message  The message received
+   * @returns {void}
    */
   constructor(message) {
     this.message = message;
   }
 
   /**
-   * Provides arguments
+   * Provides arguments.
    *
+   * @param   {int} id  Desired id of the argument
+   * @returns {void}
    */
   args(id) {
     const args = CommandParser.getArgs(this.message.text);
@@ -25,8 +29,9 @@ export default class MessageBox {
 
 
   /**
-   * Provides the channel name
+   * Provides the channel name.
    *
+   * @returns {string}  The channel name
    */
   channel() {
     return this.message.channel;
@@ -34,8 +39,9 @@ export default class MessageBox {
 
 
   /**
-   * Provides the sender's name
+   * Provides the sender's name.
    *
+   * @returns {string}  The sender's name
    */
   user() {
     return this.message.user;
@@ -43,8 +49,9 @@ export default class MessageBox {
 
 
   /**
-   * Provides the message body
+   * Provides the message body.
    *
+   * @returns {string}  The message body
    */
   message() {
     return this.message.text;
@@ -52,8 +59,10 @@ export default class MessageBox {
 
 
   /**
-   * Decides whether the user with given id was mentioned
+   * Decides whether the user with given id was mentioned.
    *
+   * @param   {int} id  The user's id
+   * @returns {bool}  Whether the user has been mentioned
    */
   isMentioned(id) {
     return CommandParser.isMentioned(id, this.message.text);
