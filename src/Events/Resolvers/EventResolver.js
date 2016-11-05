@@ -39,7 +39,7 @@ export default class EventResolver extends AbstractClass {
   /**
    * Start up the rtm listeners.
    *
-   * @param   {RtmClient} rtm  The real time messaging clien instance
+   * @param   {RtmClient} rtm  The real time messaging client instance
    * @param   {Slack} slack  The Slack client class
    * @returns {void}
    */

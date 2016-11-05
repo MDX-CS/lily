@@ -12,6 +12,7 @@ export default class MessageEventResolver extends EventResolver {
     return ['message'];
   }
 
+
   /**
    * Action to resolve the event.
    *
