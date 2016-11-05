@@ -47,14 +47,14 @@ __Modules__
 When adding new functionality via _Modules_, create a new folder in the `src/Modules` direcotry and make your own `ModuleProvider`, which will extend the abstract one from the `src/Modules` directory. This forces you to implement two methods - `commands()` and `register()` - the first method determines which commands will your module react to, whereas the second one is called whenever your module should react. So far, there are two ways of registering commands your module should react to - by list of literal string or by a regex.
 
 ```javascript
-/** This module will react to messages in format "@lily some ..." or "@lily strings ..."
+/** This module will react to messages in format "@lily some ..." or "@lily strings ..." */
 commands() {
   return ['some', 'strings']
 }
 ```
 
 ```javascript
-/** This module will react to any messages containing the "regex" string AFTER the bot has been mentioned
+/** This module will react to any messages containing the "regex" string AFTER the bot has been mentioned */
 commands() {
   return {
     pattern: /.* regex.*/,
