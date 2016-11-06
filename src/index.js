@@ -1,5 +1,5 @@
 /**
- * Lily bot
+ * The ultimate Slack bot.
  *
  * @package lily
  * @author Pavel Koch <kouks.koch@gmail.com>
@@ -15,7 +15,7 @@ import Handler from './Events/Handler';
  | Register global configuration
  |-----------------------------------------------------------------------
  |
- | Load .env file
+ | Load the .env file.
  |
  */
 
@@ -30,10 +30,10 @@ DotEnv.config();
  |
  */
 
-const App = new Handler(
+const Lily = new Handler(
   new SlackClient.RtmClient(process.env.SLACK_API_TOKEN),
   new Slack(process.env.SLACK_API_TOKEN),
   SlackClient.RTM_EVENTS,
 );
 
-App.listen();
+Lily.listen();
