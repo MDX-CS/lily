@@ -1,7 +1,7 @@
 import gulp from 'gulp';
+import gutil from 'gulp-util';
 import babel from 'gulp-babel';
 import mocha from 'gulp-mocha';
-import gutil from 'gulp-util';
 import eslint from 'gulp-eslint';
 
 gulp.task('default', ['lint', 'test']);
@@ -20,8 +20,8 @@ gulp.task('test', ['babel'], () => {
     });
 });
 
-gulp.task('watch', ['test'], () => {
-  return gulp.watch(['src/**/*.js', 'tests/**/*.js'], ['test']);
+gulp.task('watch', ['lint', 'test'], () => {
+  return gulp.watch(['src/**/*.js', 'tests/**/*.js'], ['lint', 'test']);
 });
 
 gulp.task('lint', () => {

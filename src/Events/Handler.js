@@ -10,15 +10,15 @@ export default class EventHandler {
    *
    * @param   {RtmClient} rtm  The real time messaging client
    * @param   {Slack} slack  The Slack client class
-   * @param   {Array} events  The array of events
    * @returns {void}
    */
-  constructor(rtm, slack, events) {
-    this.events = events;
+  constructor(rtm, slack) {
     this.rtm = rtm;
     this.slack = slack;
-    this.modules = [];
 
+    // We need to register all Resolvers as well as Modules. This
+    // is the place where you register newly creted modules and
+    // resolvers with the application kernel.
     this.registerResolvers();
     this.registerModules();
 
