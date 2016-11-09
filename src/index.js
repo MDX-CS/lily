@@ -5,21 +5,10 @@
  * @author Pavel Koch <kouks.koch@gmail.com>
  */
 
-import DotEnv from 'dotenv';
 import Slack from 'slack-node';
 import SlackClient from '@slack/client';
 import Handler from './Events/Handler';
-
-/*
- |-----------------------------------------------------------------------
- | Register global configuration
- |-----------------------------------------------------------------------
- |
- | Load the .env file.
- |
- */
-
-DotEnv.config();
+import { env } from './helpers';
 
 /*
  |-----------------------------------------------------------------------
@@ -31,8 +20,8 @@ DotEnv.config();
  */
 
 const Lily = new Handler(
-  new SlackClient.RtmClient(process.env.SLACK_API_TOKEN),
-  new Slack(process.env.SLACK_API_TOKEN),
+  new SlackClient.RtmClient(env('SLACK_API_TOKEN')),
+  new Slack(env('SLACK_API_TOKEN')),
   SlackClient.RTM_EVENTS,
 );
 

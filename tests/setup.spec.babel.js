@@ -1,16 +1,17 @@
 import { expect } from 'chai';
 import SlackClient from '@slack/client';
+import { env } from '../src/helpers';
 
 require('dotenv').config();
 
 describe('On setup it', () => {
   it('loads the environment file', () => {
-    expect(process.env.APP_NAME).to.equal('Lily');
-    expect(process.env.SLACK_API_TOKEN).to.exist;
+    expect(env('APP_NAME')).to.equal('Lily');
+    expect(env('SLACK_API_TOKEN')).to.not.be.empty;
   });
 
   it('connects to the RTM Client', () => {
-    let RTM = new SlackClient.RtmClient(process.env.SLACK_API_TOKEN);
+    let RTM = new SlackClient.RtmClient(env('SLACK_API_TOKEN'));
     expect(RTM).to.be.ok;
   });
 });
